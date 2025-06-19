@@ -6,7 +6,7 @@ import (
 )
 
 type SecondsTimer struct {
-	timer     *time.Timer
+	Timer     *time.Timer
 	end       time.Time
 	remaining time.Duration
 }
@@ -19,17 +19,17 @@ func NewSecondsTimer(t time.Duration) (*SecondsTimer, error) {
 }
 
 func (s *SecondsTimer) Reset(t time.Duration) {
-	s.timer.Reset(t)
+	s.Timer.Reset(t)
 	s.end = time.Now().Add(t)
 }
 
 func (s *SecondsTimer) Stop() {
-	s.timer.Stop()
+	s.Timer.Stop()
 	s.remaining = s.TimeRemaining() // Save time for later use in the Resume Method
 }
 
 func (s *SecondsTimer) Resume() {
-	s.timer = time.NewTimer(s.remaining)
+	s.Timer = time.NewTimer(s.remaining)
 }
 
 func (s *SecondsTimer) TimeRemaining() time.Duration {
